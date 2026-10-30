@@ -15,6 +15,11 @@ jobs:
           distribution: temurin
           java-version: 17
 
+      - name: Accept SDK licences and install NDK
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null || true
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "ndk;29.0.13113456" "cmake;3.22.1"
+
       - name: Build debug APK
         working-directory: examples/llama.android
         run: |
